@@ -1,0 +1,3 @@
+[submodule "GoLibrary-api"]
+	path = GoLibrary-api
+	url = git@github.com:Ivanhahanov/GoLibrary-api.git
