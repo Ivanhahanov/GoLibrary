@@ -12,6 +12,9 @@ services:
       - /etc/golibrary/books:/etc/golibrary/books
     ports:
       - 80:8080
+    networks:
+      - odfe-net
+
   mongodb:
     container_name: mongobd
     # database for store info of documents
@@ -24,6 +27,9 @@ services:
     restart: unless-stopped
     volumes:
       - mongo-data:/data/db
+    networks:
+      - odfe-net
+
   odfe-node1:
     build:
       context: elasticsearch
