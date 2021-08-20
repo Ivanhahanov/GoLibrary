@@ -11,24 +11,17 @@ services:
     volumes:
       - /etc/golibrary/books:/etc/golibrary/books
     ports:
-      - 80:8080
+      - "80:8080"
     networks:
       - odfe-net
 
-  mongodb:
-    container_name: mongobd
-    # database for store info of documents
-    image: mongo
+  redis:
+    image: "redis:alpine"
+    command: redis-server --requirepass sOmE_sEcUrE_pAsS
     environment:
-      - PUID=1000
-      - PGID=1000
-      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
-    restart: unless-stopped
-    ports:
-      - 27017:27017
+      - REDIS_REPLICATION_MODE=master
     volumes:
-      - mongo-data:/data/db
+      - redis-data:/var/lib/redis
     networks:
       - odfe-net
 
@@ -53,8 +46,8 @@ services:
     volumes:
       - odfe-data1:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
-      - 9600:9600 # required for Performance Analyzer
+      - "9200:9200"
+      - "9600:9600" # required for Performance Analyzer
     networks:
       - odfe-net
   odfe-node2:
@@ -83,7 +76,7 @@ services:
     image: amazon/opendistro-for-elasticsearch-kibana:1.13.2
     container_name: odfe-kibana
     ports:
-      - 5601:5601
+      - "5601:5601"
     expose:
       - "5601"
     environment:
@@ -95,7 +88,7 @@ services:
 volumes:
   odfe-data1:
   odfe-data2:
-  mongo-data:
+  redis-data:
 
 networks:
   odfe-net:
