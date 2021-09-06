@@ -11,7 +11,7 @@ services:
     volumes:
       - /etc/golibrary/books:/etc/golibrary/books
     ports:
-      - "80:8080"
+      - "80:80"
     networks:
       - odfe-net
 
