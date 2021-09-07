@@ -1,0 +1,16 @@
+
+---
+###############################################################
+#                         Users Database                      #
+###############################################################
+
+# This file can be used if you do not have an LDAP set up.
+
+# List of users
+users:
+  test:
+    displayname: "Test"
+    password: "$argon2id$v=19$m=65536,t=1,p=8$RTNRQ2ZlRkJ2UStQWlRjYw$03XD9l3JnC4N13i1zg4PPgCUabisW3XCCNigH87FLDI"
+    groups:
+      - admins
+      - dev

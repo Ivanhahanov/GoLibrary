@@ -1,2 +1,7 @@
 .idea/
 .env
+traefik/certs/*
+!traefik/certs/.gitkeep
+
+authelia/db.sqlite3
+authelia/notification.txt
