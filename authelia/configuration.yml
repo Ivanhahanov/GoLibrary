@@ -27,6 +27,8 @@ access_control:
       policy: one_factor
     - domain: traefik.example.com
       policy: one_factor
+    - domain: kibana.example.com
+      policy: bypass
 
 session:
   name: authelia_session
