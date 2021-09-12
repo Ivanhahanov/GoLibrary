@@ -65,7 +65,15 @@ http:
         - "websecure"
       middlewares:
         - "authelia"
+        - "header"
       service: app
+    web-router:
+      rule: "Host(`lib.example.com`)"
+      entryPoints:
+        - "websecure"
+      middlewares:
+        - "authelia"
+      service: web
     shorter-router:
       rule: "Host(`s.example.com`)"
       entryPoints:
@@ -94,6 +102,10 @@ http:
       loadBalancer:
         servers:
           - url: http://app:80/
+    web:
+      loadBalancer:
+        servers:
+          - url: http://192.168.88.11:8081
     shorter:
       loadBalancer:
         servers:
@@ -109,4 +121,8 @@ http:
         address: "http://authelia:9091/api/verify?rd=https://authelia.example.com/"
         trustForwardHeader: true
         authResponseHeaders: Remote-User,Remote-Groups,Remote-Name,Remote-Email
-
+    header:
+      headers:
+        customResponseHeaders:
+          Access-Control-Allow-Origin: "https://lib.example.com"
+          Access-Control-Allow-Credentials: "true"
